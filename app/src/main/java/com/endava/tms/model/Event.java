@@ -77,4 +77,17 @@ public class Event {
     public void setEventImage(Integer eventImage) {
         this.eventImage = eventImage;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventName='" + eventName + '\'' +
+                ", eventDescription='" + eventDescription + '\'' +
+                ", venueLocation='" + venueLocation + '\'' +
+                ", eventType='" + eventType + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", eventImage=" + eventImage +
+                '}';
+    }
 }

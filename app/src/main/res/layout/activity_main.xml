@@ -15,6 +15,7 @@
         <android.widget.SearchView
             android:layout_height="50dp"
             android:layout_width="match_parent"
+            android:queryHint="Search"
             android:id="@+id/searchbar" />
     </LinearLayout>
 

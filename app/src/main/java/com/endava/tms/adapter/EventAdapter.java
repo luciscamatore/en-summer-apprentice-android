@@ -47,8 +47,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
                 Toast.makeText(context,"msj",Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     @Override
