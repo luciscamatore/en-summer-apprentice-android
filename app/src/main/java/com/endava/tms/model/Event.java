@@ -1,5 +1,6 @@
 package com.endava.tms.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Event {
@@ -7,11 +8,11 @@ public class Event {
     String eventDescription;
     String venueLocation;
     String eventType;
-    LocalDateTime startDate;
-    LocalDateTime endDate;
+    LocalDate startDate;
+    LocalDate endDate;
     Integer eventImage;
 
-    public Event(String eventName, String eventDescription, String venueLocation, String eventType, LocalDateTime startDate, LocalDateTime endDate, Integer eventImage) {
+    public Event(String eventName, String eventDescription, String venueLocation, String eventType, LocalDate startDate, LocalDate endDate, Integer eventImage) {
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.venueLocation = venueLocation;
@@ -53,19 +54,19 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

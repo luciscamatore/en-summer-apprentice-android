@@ -2,7 +2,11 @@ package com.endava.tms.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,10 +41,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         holder.startDateView.setText(events.get(position).getStartDate().toString());
         holder.endDateView.setText(events.get(position).getEndDate().toString());
         holder.eventImage.setImageResource(events.get(position).getEventImage());
+        EventViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"msj",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
         return events.size();
     }
+
 }

@@ -4,20 +4,24 @@
     android:layout_height="wrap_content"
     android:background="@color/gri_misto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fontFamily="@font/monsterrat">
 
     <androidx.cardview.widget.CardView
         app:cardElevation="10dp"
         app:cardCornerRadius="10dp"
-        android:layout_margin="5dp"
-        app:cardBackgroundColor="@color/white"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white_t"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:id="@+id/cardViewID">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@style/roundedImageView"
@@ -30,12 +34,14 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/eventName"
                     android:textColor="@color/gri_misto"
+                    android:fontFamily="@font/monsterrat_bold"
                     android:text="Event Name"/>
                 <TextView
                     android:layout_width="match_parent"
@@ -55,19 +61,21 @@
                     android:layout_width="222dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gri_misto"
-                    android:text="Venue Location" />
+                    android:text="Event Type" />
                 <TextView
                     android:id="@+id/startDate"
                     android:layout_width="222dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gri_misto"
-                    android:text="Venue Location" />
+                    android:text="Start Date" />
+
                 <TextView
                     android:id="@+id/endDate"
                     android:layout_width="222dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gri_misto"
-                    android:text="Venue Location" />
+                    android:text="End Date" />
+
             </LinearLayout>
 
         </LinearLayout>

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TMS</string>
+
+    <string-array name="event_sort">
+        <item>Price Ascending</item>
+        <item>Price Descending</item>
+        <item>Name Ascending</item>
+        <item>Name Descending</item>
+        <item>VIP</item>
+        <item>Standard</item>
+    </string-array>
 </resources>
+
