@@ -44,11 +44,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         holder.eventNameView.setText(events.get(position).getEventName());
         holder.eventDescriptionView.setText(events.get(position).getEventDescription());
-        holder.venueLocationView.setText(events.get(position).getVenueLocation());
+        holder.venueLocationView.setText(events.get(position).getVenue().getLocation());
         holder.eventTypeView.setText(events.get(position).getEventType());
         holder.startDateView.setText(events.get(position).getStartDate().toString());
         holder.endDateView.setText(events.get(position).getEndDate().toString());
-        holder.eventImage.setImageResource(events.get(position).getEventImage());
+        //holder.eventImage.setImageResource(events.get(position).getEventImage());
         EventViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

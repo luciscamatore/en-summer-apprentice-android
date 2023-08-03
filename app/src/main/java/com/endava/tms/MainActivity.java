@@ -16,21 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endava.tms.adapter.EventAdapter;
+import com.endava.tms.apiinterface.ApiClient;
+import com.endava.tms.apiinterface.ApiInterface;
 import com.endava.tms.model.Event;
 
-import java.time.LocalDate;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
-    public List<Event> eventList;
-    public EventAdapter sortAdapter;
-    public EventAdapter searchAdapter;
+    public List<Event> eventList = new ArrayList<>();
+    public EventAdapter eventAdapter;
+    public ApiInterface apiInterface;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,21 +42,40 @@ public class MainActivity extends AppCompatActivity {
         this.setTitle("Events");
         //getSupportActionBar().hide();
 
+        getAllEvents();
+
         setUpSearch();
         setUpSpinner();
-        fillList();
-        setUpReciclerView();
-
+        setUpRecyclerView();
 
     }
-    public void setUpReciclerView(){
+    public void getAllEvents(){
+        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<Event>> call = apiInterface.getAllEvents();
+        call.enqueue(new Callback<List<Event>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+                Log.d("call", "Status code: "+response.code());
+                eventList.clear();
+                if(response.body() != null)
+                    eventList.addAll(response.body());
+                eventAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<List<Event>> call, Throwable t) {
+                Log.d("call", "Failed: "+t.toString());
+            }
+        });
+    }
+    public void setUpRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.reciclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //      recyclerView.setAdapter(new EventAdapter(getApplicationContext(),eventList));
 
-        searchAdapter = new EventAdapter(this, this.eventList);
+        eventAdapter = new EventAdapter(this, this.eventList);
 
-        recyclerView.setAdapter(this.searchAdapter);
+        recyclerView.setAdapter(this.eventAdapter);
     }
 
     public void setUpSpinner(){
@@ -68,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 sorter(i);
-                searchAdapter.notifyDataSetChanged();
+                eventAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -89,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public boolean onQueryTextChange(String s) {
-                searchAdapter.getFilter().filter(s);
+                eventAdapter.getFilter().filter(s);
                 return false;
             }
         });
@@ -115,13 +136,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void fillList(){
-        eventList = new ArrayList<>();
-        eventList.add(new Event("Electric Castle","Muzica electronica si nu numai","Bontida Castle","Festival", LocalDate.now(), LocalDate.now(),R.drawable.ec));
-        eventList.add(new Event("Untold","Muzica electronica si nu numai","la untold","Festival", LocalDate.now(), LocalDate.now(),R.drawable.untold));
-        eventList.add(new Event("Wine Festival","Vin","Central Park Cluj-Napoca","Beutura", LocalDate.now(), LocalDate.now(),R.drawable.wine));
-        eventList.add(new Event("Maieru vs Sangeorz","Folbal","Sintetic Sangeorz","Sport", LocalDate.now(), LocalDate.now(),R.drawable.fb));
-        eventList.add(new Event("SYF","Sangeorz Youth Fest","Sangeorz-Bai Central Park","Muzica", LocalDate.now(), LocalDate.now(),R.drawable.syf));
-
+    public void addImages(){
+//        eventList = new ArrayList<>();
+//        eventList.add(new Event("Electric Castle","Muzica electronica si nu numai","Bontida Castle","Festival", LocalDate.now(), LocalDate.now(),R.drawable.ec));
+//        eventList.add(new Event("Untold","Muzica electronica si nu numai","la untold","Festival", LocalDate.now(), LocalDate.now(),R.drawable.untold));
+//        eventList.add(new Event("Wine Festival","Vin","Central Park Cluj-Napoca","Beutura", LocalDate.now(), LocalDate.now(),R.drawable.wine));
+//        eventList.add(new Event("Maieru vs Sangeorz","Folbal","Sintetic Sangeorz","Sport", LocalDate.now(), LocalDate.now(),R.drawable.fb));
+//        eventList.add(new Event("SYF","Sangeorz Youth Fest","Sangeorz-Bai Central Park","Muzica", LocalDate.now(), LocalDate.now(),R.drawable.syf));
+        //for(Event ev : eventList)
+            //ev.setImage()
     }
 }

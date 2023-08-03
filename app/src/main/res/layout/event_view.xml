@@ -29,7 +29,7 @@
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 android:id="@+id/imageView"
-                android:src="@drawable/ec"/>
+                android:src="@drawable/electriccastle"/>
 
             <LinearLayout
                 android:orientation="vertical"

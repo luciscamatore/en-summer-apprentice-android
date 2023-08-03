@@ -2,48 +2,44 @@ package com.endava.tms.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Event {
-    String eventName;
-    String eventDescription;
-    String venueLocation;
+    Integer eventID;
+    Venue venue;
     String eventType;
-    LocalDate startDate;
-    LocalDate endDate;
+    String eventDescription;
+    String eventName;
+    String startDate;
+    String endDate;
+    List<TicketCategory> ticketCategory;
     Integer eventImage;
 
-    public Event(String eventName, String eventDescription, String venueLocation, String eventType, LocalDate startDate, LocalDate endDate, Integer eventImage) {
-        this.eventName = eventName;
-        this.eventDescription = eventDescription;
-        this.venueLocation = venueLocation;
+    public Event(Integer eventID, Venue venue, String eventType, String eventDescription, String eventName, String startDate, String endDate, List<TicketCategory> ticketCategory) {
+        this.eventID = eventID;
+        this.venue = venue;
         this.eventType = eventType;
+        this.eventDescription = eventDescription;
+        this.eventName = eventName;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.eventImage = eventImage;
+        this.ticketCategory = ticketCategory;
     }
 
-    public String getEventName() {
-        return eventName;
+    public Integer getEventID() {
+        return eventID;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setEventID(Integer eventID) {
+        this.eventID = eventID;
     }
 
-    public String getEventDescription() {
-        return eventDescription;
+    public Venue getVenue() {
+        return venue;
     }
 
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
-
-    public String getVenueLocation() {
-        return venueLocation;
-    }
-
-    public void setVenueLocation(String venueLocation) {
-        this.venueLocation = venueLocation;
+    public void setVenue(Venue venue) {
+        this.venue = venue;
     }
 
     public String getEventType() {
@@ -54,40 +50,57 @@ public class Event {
         this.eventType = eventType;
     }
 
-    public LocalDate getStartDate() {
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public Integer getEventImage() {
-        return eventImage;
+    public List<TicketCategory> getTicketCategory() {
+        return ticketCategory;
     }
 
-    public void setEventImage(Integer eventImage) {
-        this.eventImage = eventImage;
+    public void setTicketCategory(List<TicketCategory> ticketCategory) {
+        this.ticketCategory = ticketCategory;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventName='" + eventName + '\'' +
-                ", eventDescription='" + eventDescription + '\'' +
-                ", venueLocation='" + venueLocation + '\'' +
+                "eventID=" + eventID +
+                ", venue=" + venue +
                 ", eventType='" + eventType + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", eventImage=" + eventImage +
+                ", eventDescription='" + eventDescription + '\'' +
+                ", eventName='" + eventName + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", ticketCategory=" + ticketCategory +
                 '}';
     }
 }
