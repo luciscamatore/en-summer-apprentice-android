@@ -2,6 +2,7 @@ package com.endava.tms.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +24,14 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     Context context;
     List<Event> events;
-    List<Event> eventsFull;
+    List<Event> eventsFull = new ArrayList<>();
 
     public EventAdapter(Context context, List<Event> events) {
         this.context = context;
         this.events = events;
-        eventsFull = new ArrayList<>(events);
+        eventsFull.addAll(events);
     }
-    public EventAdapter(List<Event> events){
-        this.events = events;
-        eventsFull = new ArrayList<>(events);
-    }
+
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,7 +46,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         holder.eventTypeView.setText(events.get(position).getEventType());
         holder.startDateView.setText(events.get(position).getStartDate().toString());
         holder.endDateView.setText(events.get(position).getEndDate().toString());
-        //holder.eventImage.setImageResource(events.get(position).getEventImage());
+        holder.eventImage.setImageResource(events.get(position).getEventImage());
         EventViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,9 +68,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<Event> filteredEvents = new ArrayList<>();
 
-            if(charSequence == null || charSequence.length() == 0)
+            if(charSequence == null || charSequence.length() == 0) {
                 filteredEvents.addAll(eventsFull);
-            else{
+            } else{
                 String filterPattern = charSequence.toString().toLowerCase().trim();
 
                 for(Event ev : eventsFull)

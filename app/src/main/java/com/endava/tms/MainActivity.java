@@ -43,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
         //getSupportActionBar().hide();
 
         getAllEvents();
-
-        setUpSearch();
-        setUpSpinner();
-        setUpRecyclerView();
-
     }
     public void getAllEvents(){
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -58,8 +53,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 Log.d("call", "Status code: "+response.code());
                 eventList.clear();
-                if(response.body() != null)
+                if(response.body() != null) {
                     eventList.addAll(response.body());
+                    addImages(eventList);
+                }
+
+                setUpSearch();
+                setUpSpinner();
+                setUpRecyclerView();
                 eventAdapter.notifyDataSetChanged();
             }
             @Override
@@ -71,10 +72,8 @@ public class MainActivity extends AppCompatActivity {
     public void setUpRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.reciclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//      recyclerView.setAdapter(new EventAdapter(getApplicationContext(),eventList));
 
         eventAdapter = new EventAdapter(this, this.eventList);
-
         recyclerView.setAdapter(this.eventAdapter);
     }
 
@@ -91,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 sorter(i);
                 eventAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -101,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setUpSearch(){
         SearchView searchView = findViewById(R.id.searchbar);
-        //searchView.setSubmitButtonEnabled(true);
+        //searchView.setSubmitButtonEnabled(true); //-> poate mai am nevoie
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -136,14 +134,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void addImages(){
-//        eventList = new ArrayList<>();
-//        eventList.add(new Event("Electric Castle","Muzica electronica si nu numai","Bontida Castle","Festival", LocalDate.now(), LocalDate.now(),R.drawable.ec));
-//        eventList.add(new Event("Untold","Muzica electronica si nu numai","la untold","Festival", LocalDate.now(), LocalDate.now(),R.drawable.untold));
-//        eventList.add(new Event("Wine Festival","Vin","Central Park Cluj-Napoca","Beutura", LocalDate.now(), LocalDate.now(),R.drawable.wine));
-//        eventList.add(new Event("Maieru vs Sangeorz","Folbal","Sintetic Sangeorz","Sport", LocalDate.now(), LocalDate.now(),R.drawable.fb));
-//        eventList.add(new Event("SYF","Sangeorz Youth Fest","Sangeorz-Bai Central Park","Muzica", LocalDate.now(), LocalDate.now(),R.drawable.syf));
-        //for(Event ev : eventList)
-            //ev.setImage()
+    public void addImages(List<Event> events){
+        for (Event ev : events) {
+            if (ev.getEventName().equals("Electric Castle"))
+                ev.setEventImage(R.drawable.electriccastle);
+            if (ev.getEventName().equals("Meci de fotbal"))
+                ev.setEventImage(R.drawable.mecidefotbal);
+            if (ev.getEventName().equals("SYF"))
+                ev.setEventImage(R.drawable.syf);
+            if (ev.getEventName().equals("Untold"))
+                ev.setEventImage(R.drawable.untold);
+            if (ev.getEventName().equals("Wine Festival"))
+                ev.setEventImage(R.drawable.winefestival);
+        }
     }
 }

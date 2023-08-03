@@ -90,6 +90,14 @@ public class Event {
         this.ticketCategory = ticketCategory;
     }
 
+    public Integer getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(Integer eventImage) {
+        this.eventImage = eventImage;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
