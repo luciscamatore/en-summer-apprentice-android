@@ -1,15 +1,19 @@
 package com.endava.tms;
 
-
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +38,25 @@ public class MainActivity extends AppCompatActivity {
     public EventAdapter eventAdapter;
     public ApiInterface apiInterface;
 
+    public Intent intent;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if( id == R.id.mybutton){
+            intent = new Intent(MainActivity.this, OrderActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
-                Log.d("call", "Status code: "+response.code());
+                Log.d("call", "Status code: " + response.code());
                 eventList.clear();
                 if(response.body() != null) {
                     eventList.addAll(response.body());
@@ -65,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
-                Log.d("call", "Failed: "+t.toString());
+                Log.d("call", "Failed: " + t.toString());
             }
         });
     }
@@ -73,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.reciclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        eventAdapter = new EventAdapter(this, this.eventList);
+        eventAdapter = new EventAdapter(this, this.eventList, intent);
         recyclerView.setAdapter(this.eventAdapter);
     }
 

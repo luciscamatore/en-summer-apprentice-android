@@ -1,14 +1,14 @@
 package com.endava.tms.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.util.Log;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.endava.tms.R;
 import com.endava.tms.model.Event;
+import com.endava.tms.popup.EventPopUp;
 import com.endava.tms.viewholder.EventViewHolder;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     Context context;
     List<Event> events;
     List<Event> eventsFull = new ArrayList<>();
+    Intent intent;
 
-    public EventAdapter(Context context, List<Event> events) {
+    public EventAdapter(Context context, List<Event> events, Intent intent) {
         this.context = context;
         this.events = events;
         eventsFull.addAll(events);
+        this.intent = intent;
     }
 
     @NonNull
@@ -39,7 +43,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.eventNameView.setText(events.get(position).getEventName());
         holder.eventDescriptionView.setText(events.get(position).getEventDescription());
         holder.venueLocationView.setText(events.get(position).getVenue().getLocation());
@@ -50,7 +54,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         EventViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"msj",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,""+events.get(position).getEventID(),Toast.LENGTH_SHORT).show();
+                EventPopUp popUpClass = new EventPopUp();
+                popUpClass.showPopUp(view);
             }
         });
     }
