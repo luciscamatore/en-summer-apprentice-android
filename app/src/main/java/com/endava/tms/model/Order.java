@@ -1,17 +1,28 @@
 package com.endava.tms.model;
 
-public class Order {
+import com.google.gson.annotations.SerializedName;
 
-    String eventName;
+public class Order {
+    int orderID;
+    @SerializedName("eventName")
+    String orderEventName;
     int nrTickets;
     int price;
 
-    public String getEventName() {
-        return eventName;
+    public int getOrderID() {
+        return orderID;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getOrderEventName() {
+        return orderEventName;
+    }
+
+    public void setOrderEventName(String orderEventName) {
+        this.orderEventName = orderEventName;
     }
 
     public int getNrTickets() {
@@ -33,7 +44,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "eventName='" + eventName + '\'' +
+                "orderID=" + orderID +
+                ", orderEventName='" + orderEventName + '\'' +
                 ", nrTickets=" + nrTickets +
                 ", price=" + price +
                 '}';

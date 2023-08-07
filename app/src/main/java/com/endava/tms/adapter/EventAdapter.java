@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endava.tms.R;
@@ -55,8 +56,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,""+events.get(position).getEventID(),Toast.LENGTH_SHORT).show();
-                EventPopUp popUpClass = new EventPopUp();
-                popUpClass.showPopUp(view);
+                popUp();
             }
         });
     }
@@ -96,5 +96,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
             notifyDataSetChanged();
         }
     };
-
+    public void popUp(){
+        EventPopUp eventPopUp = new EventPopUp();
+        eventPopUp.show(((AppCompatActivity)context).getSupportFragmentManager(), "Dialog");
+    }
 }

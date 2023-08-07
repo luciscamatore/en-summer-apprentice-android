@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gri_misto"
@@ -13,7 +13,7 @@
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:id="@+id/cardViewOrderID">
 
@@ -23,44 +23,94 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp">
 
-<!--            <com.google.android.material.imageview.ShapeableImageView-->
-<!--                app:shapeAppearanceOverlay="@style/roundedImageView"-->
-<!--                android:layout_width="150dp"-->
-<!--                android:layout_height="150dp"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:id="@+id/imageView"-->
-<!--                android:src="@drawable/electriccastle"/>-->
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/orderEventName"
                     android:textColor="@color/gri_misto"
                     android:fontFamily="@font/monsterrat_bold"
                     android:text="Event Name"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/nrTickets"
                     android:textColor="@color/gri_misto"
                     android:text="Number of Tickets" />
 
                 <TextView
-                    android:id="@+id/price"
-                    android:layout_width="222dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/gri_misto"
                     android:text="Price" />
-
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/orderEventName"
+                    android:textColor="@color/gri_misto"
+                    android:text="EVENT"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nrTickets"
+                    android:textColor="@color/gri_misto"
+                    android:text="NR"/>
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gri_misto"
+                    android:text="PRICE"/>
+            </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/red"
+                        android:textColor="@color/white"
+                        android:id="@+id/deleteButton"
+                        android:text="Delete"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/purple_500"
+                        android:textColor="@color/white"
+                        android:id="@+id/modifyButton"
+                        android:text="Modify" />
+                </LinearLayout>
+            </RelativeLayout>
+
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
+</RelativeLayout>
 
-</LinearLayout>
+    <!--            <com.google.android.material.imageview.ShapeableImageView-->
+    <!--                app:shapeAppearanceOverlay="@style/roundedImageView"-->
+    <!--                android:layout_width="150dp"-->
+    <!--                android:layout_height="150dp"-->
+    <!--                android:layout_margin="10dp"-->
+    <!--                android:id="@+id/imageView"-->
+    <!--                android:src="@drawable/electriccastle"/>-->

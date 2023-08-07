@@ -1,39 +1,54 @@
 package com.endava.tms.popup;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.endava.tms.R;
 
-public class EventPopUp {
+public class EventPopUp extends DialogFragment {
+    Spinner spinner;
 
-    public void showPopUp(final View view){
-        LayoutInflater layoutInflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-        View popUpView = layoutInflater.inflate(R.layout.event_popup, null);
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.event_popup, null);
 
-        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-        int height = LinearLayout.LayoutParams.MATCH_PARENT;
+        spinner = view.findViewById(R.id.category_spinner);
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getContext(), R.array.category, android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
 
-        boolean focusable = true;
+        builder.setView(view)
+                .setTitle("Place order")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-        final PopupWindow popUpWindow = new PopupWindow(popUpView, width,height,focusable);
-        popUpWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                    }
+                })
+                .setPositiveButton("Place order", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-        TextView text = popUpView.findViewById(R.id.t);
-
-        popUpView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                popUpWindow.dismiss();
-                return true;
-            }
-        });
-
+                    }
+                });
+        return builder.create();
     }
 }
