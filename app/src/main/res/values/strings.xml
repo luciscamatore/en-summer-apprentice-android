@@ -2,12 +2,10 @@
     <string name="app_name">TMS</string>
     <string name="sort">Sort By</string>
     <string-array name="event_sort">
-        <item>Price &#x1F53C;</item>
-        <item>Price &#x1F53D;</item>
         <item>Name &#x1F53C;</item>
         <item>Name &#x1F53D;</item>
-        <item>VIP</item>
-        <item>Standard</item>
+        <item>Start Date &#x1F53C;</item>
+        <item>Start Date &#x1F53D;</item>
     </string-array>
 
     <string-array name="category">

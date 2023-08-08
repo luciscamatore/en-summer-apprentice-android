@@ -2,8 +2,13 @@ package com.endava.tms.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+import java.util.Objects;
+
 public class Order {
     int orderID;
+    @SerializedName("ticketCategoryDTO")
+    TicketCategory ticketCategory;
     @SerializedName("eventName")
     String orderEventName;
     int nrTickets;
@@ -15,6 +20,14 @@ public class Order {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
+    }
+
+    public TicketCategory getTicketCategory() {
+        return ticketCategory;
+    }
+
+    public void setTicketCategory(TicketCategory ticketCategory) {
+        this.ticketCategory = ticketCategory;
     }
 
     public String getOrderEventName() {
@@ -45,9 +58,20 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "orderID=" + orderID +
+                ", ticketCategory=" + ticketCategory +
                 ", orderEventName='" + orderEventName + '\'' +
                 ", nrTickets=" + nrTickets +
                 ", price=" + price +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return orderID == order.orderID;
+    }
+
+
 }

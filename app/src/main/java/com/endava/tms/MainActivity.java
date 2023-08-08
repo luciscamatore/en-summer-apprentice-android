@@ -24,6 +24,7 @@ import com.endava.tms.apiinterface.ApiClient;
 import com.endava.tms.apiinterface.ApiInterface;
 import com.endava.tms.model.Event;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         if( id == R.id.mybutton){
             intent = new Intent(this, OrderActivity.class);
             startActivity(intent);
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -63,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.setTitle("Events");
-        //getSupportActionBar().hide();
 
         getAllEvents();
     }
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setUpSearch(){
         SearchView searchView = findViewById(R.id.searchbar);
-        //searchView.setSubmitButtonEnabled(true); //-> poate mai am nevoie
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -139,24 +139,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void sorter(int position){
         switch (position){
-            case 0: //aici trebe dupa pret (vedem cand ne bagam la conectare la backend)
-                eventList.sort((e1, e2) -> e1.getEventType().compareTo(e2.getEventType()));
-                break;
-            case 1: //la fel ca la 0
+            case 0: //nume
                 eventList.sort((e1,e2) -> e1.getEventName().compareTo(e2.getEventName()));
+                break;
+            case 1:
+                eventList.sort(Comparator.comparing(Event::getEventName));
                 Collections.reverse(eventList);
                 break;
-            case 2:
-                eventList.sort((e1,e2) -> e1.getEventName().compareTo(e2.getEventName()));
+            case 2: //start date
+                eventList.sort((e1,e2) -> e1.getStartDate().compareTo(e2.getStartDate()));
                 break;
             case 3:
-                eventList.sort(Comparator.comparing(Event::getEventName));
+                eventList.sort((e1,e2) -> e1.getStartDate().compareTo(e2.getStartDate()));
                 Collections.reverse(eventList);
                 break;
             default:
                 break;
         }
     }
+    //coding monkey style
     public void addImages(List<Event> events){
         for (Event ev : events) {
             if (ev.getEventName().equals("Electric Castle"))

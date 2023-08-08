@@ -2,12 +2,12 @@ package com.endava.tms.model;
 
 public class OrderPatchDTO {
     Integer orderID;
-    Integer ticketCategoryID;
+    String ticketCategoryDescription;
     long nrTickets;
 
-    public OrderPatchDTO(Integer orderID, Integer ticketCategoryID, long nrTickets) {
+    public OrderPatchDTO(Integer orderID, String ticketCategoryDescription, long nrTickets) {
         this.orderID = orderID;
-        this.ticketCategoryID = ticketCategoryID;
+        this.ticketCategoryDescription = ticketCategoryDescription;
         this.nrTickets = nrTickets;
     }
 
@@ -19,12 +19,12 @@ public class OrderPatchDTO {
         this.orderID = orderID;
     }
 
-    public Integer getTicketCategoryID() {
-        return ticketCategoryID;
+    public String getTicketCategoryID() {
+        return ticketCategoryDescription;
     }
 
-    public void setTicketCategoryID(Integer ticketCategoryID) {
-        this.ticketCategoryID = ticketCategoryID;
+    public void setTicketCategoryID(String ticketCategoryID) {
+        this.ticketCategoryDescription = ticketCategoryID;
     }
 
     public long getNrTickets() {
@@ -33,5 +33,14 @@ public class OrderPatchDTO {
 
     public void setNrTickets(long nrTickets) {
         this.nrTickets = nrTickets;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderPatchDTO{" +
+                "orderID=" + orderID +
+                ", ticketCategoryID=" + ticketCategoryDescription +
+                ", nrTickets=" + nrTickets +
+                '}';
     }
 }

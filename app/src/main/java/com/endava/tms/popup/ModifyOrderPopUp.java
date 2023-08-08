@@ -3,47 +3,47 @@ package com.endava.tms.popup;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
+import android.app.TaskInfo;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.endava.tms.R;
-import com.endava.tms.adapter.EventAdapter;
 import com.endava.tms.adapter.OrderAdapter;
 import com.endava.tms.apiinterface.ApiClient;
 import com.endava.tms.apiinterface.ApiInterface;
-import com.endava.tms.model.OrderPostDTO;
+import com.endava.tms.model.Order;
+import com.endava.tms.model.OrderPatchDTO;
+import com.endava.tms.model.TicketCategory;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EventPopUp extends DialogFragment {
+public class ModifyOrderPopUp extends DialogFragment {
     ApiInterface apiInterface;
-    EventAdapter eventAdapter;
+    OrderAdapter orderAdapter;
+    Integer orderID;
+    List<Order> orderList;
     Spinner spinner;
     String ticketDescription;
-    Integer eventID;
 
-    public EventPopUp(EventAdapter eventAdapter, Integer eventID) {
-        this.eventAdapter = eventAdapter;
-        this.eventID = eventID;
+    public ModifyOrderPopUp(Integer orderID, List<Order> orderList, OrderAdapter orderAdapter) {
+        this.orderAdapter = orderAdapter;
+        this.orderID = orderID;
+        this.orderList = orderList;
     }
 
     @NonNull
@@ -69,40 +69,54 @@ public class EventPopUp extends DialogFragment {
         });
         EditText nrTick = view.findViewById(R.id.nr_tickets);
 
+
         builder.setView(view)
-                .setTitle("Place order")
+                .setTitle("Modify your order")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
                     }
                 })
-                .setPositiveButton("Place order", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Modify", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         int nrTickets =  Integer.parseInt(nrTick.getText().toString());
-                        OrderPostDTO orderPostDTO = new OrderPostDTO(eventID,ticketDescription,nrTickets);
-                        placeOrder(orderPostDTO);
+                        OrderPatchDTO orderPatchDTO = new OrderPatchDTO(orderID, ticketDescription, nrTickets);
+                        patchOrder(orderPatchDTO);
                     }
                 });
         return builder.create();
     }
-    public void placeOrder(OrderPostDTO orderPostDTO){
+
+    public void patchOrder(OrderPatchDTO orderPatchDTO){
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Void> call = apiInterface.placeOrder(orderPostDTO);
+        Call<Void> call = apiInterface.patchOrder(orderPatchDTO);
 
         call.enqueue(new Callback<Void>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Log.d("call", "Status code: " + response.code());
-                Log.d("call", "Post sucesfull");
-                eventAdapter.notifyDataSetChanged();
+                Log.d("call", "Patch sucesfull");
+                orderAdapter.notifyDataSetChanged();
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.d("call", "Failed: " + t.toString());
             }
         });
+    }
+
+    public Order findOrderByOrderID(List<Order> orders, Integer orderID){
+        for(Order o : orders)
+            if(o.getOrderID() == orderID)
+                return o;
+        return null;
+    }
+    public int findTicketID(List<Order> orders, String description){
+        for(Order o : orders)
+            if(o.getTicketCategory().getDescription().equals(description))
+                return o.getTicketCategory().getTicketCategoryID();
+        return -1;
     }
 }

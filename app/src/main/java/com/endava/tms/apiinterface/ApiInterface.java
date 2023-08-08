@@ -3,6 +3,7 @@ package com.endava.tms.apiinterface;
 import com.endava.tms.model.Event;
 import com.endava.tms.model.Order;
 import com.endava.tms.model.OrderPatchDTO;
+import com.endava.tms.model.OrderPostDTO;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -26,6 +28,9 @@ public interface ApiInterface {
     @DELETE("deleteOrder/{orderID}")
     Call<Void> deleteOrder(@Path("orderID") Integer orderID);
 
-    @PATCH("patchOrder/")
+    @PATCH("patchOrder")
     Call<Void> patchOrder(@Body OrderPatchDTO orderDTO);
+
+    @POST("placeOrder")
+    Call<Void> placeOrder(@Body OrderPostDTO orderPostDTO);
 }

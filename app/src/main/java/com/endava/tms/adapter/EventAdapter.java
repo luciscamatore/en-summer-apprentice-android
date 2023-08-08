@@ -30,6 +30,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
     List<Event> eventsFull = new ArrayList<>();
     Intent intent;
 
+    Integer eventID;
+
     public EventAdapter(Context context, List<Event> events, Intent intent) {
         this.context = context;
         this.events = events;
@@ -56,6 +58,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,""+events.get(position).getEventID(),Toast.LENGTH_SHORT).show();
+                eventID = events.get(position).getEventID();
                 popUp();
             }
         });
@@ -97,7 +100,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventViewHolder> {
         }
     };
     public void popUp(){
-        EventPopUp eventPopUp = new EventPopUp();
+        EventPopUp eventPopUp = new EventPopUp(this, eventID);
         eventPopUp.show(((AppCompatActivity)context).getSupportFragmentManager(), "Dialog");
     }
 }

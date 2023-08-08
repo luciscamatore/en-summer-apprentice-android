@@ -1,10 +1,11 @@
 package com.endava.tms.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Event {
+public class Event implements Serializable {
     Integer eventID;
     Venue venue;
     String eventType;

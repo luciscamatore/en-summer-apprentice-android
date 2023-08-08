@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.endava.tms.adapter.OrderAdapter;
 import com.endava.tms.apiinterface.ApiClient;
 import com.endava.tms.apiinterface.ApiInterface;
+import com.endava.tms.model.Event;
 import com.endava.tms.model.Order;
 
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 Log.d("call", ""+response.code());
-                Log.d("call", ""+response.body());
 
                 orderList.clear();
                 if(response.body() != null)
