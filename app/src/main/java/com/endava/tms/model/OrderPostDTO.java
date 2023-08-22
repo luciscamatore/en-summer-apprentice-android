@@ -1,14 +1,24 @@
 package com.endava.tms.model;
 
 public class OrderPostDTO {
+    Integer customerID;
     Integer eventID;
     String ticketCategoryDescription;
     int numberOfTickets;
 
-    public OrderPostDTO(Integer eventID, String ticketCategoryDescription, int numberOfTickets) {
+    public OrderPostDTO(Integer customerID, Integer eventID, String ticketCategoryDescription, int numberOfTickets) {
+        this.customerID = customerID;
         this.eventID = eventID;
         this.ticketCategoryDescription = ticketCategoryDescription;
         this.numberOfTickets = numberOfTickets;
+    }
+
+    public Integer getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(Integer customerID) {
+        this.customerID = customerID;
     }
 
     public Integer getEventID() {

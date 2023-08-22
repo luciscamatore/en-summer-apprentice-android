@@ -81,7 +81,7 @@ public class EventPopUp extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         int nrTickets =  Integer.parseInt(nrTick.getText().toString());
-                        OrderPostDTO orderPostDTO = new OrderPostDTO(eventID,ticketDescription,nrTickets);
+                        OrderPostDTO orderPostDTO = new OrderPostDTO(1, eventID,ticketDescription,nrTickets);
                         placeOrder(orderPostDTO);
                     }
                 });

@@ -162,14 +162,28 @@ public class MainActivity extends AppCompatActivity {
         for (Event ev : events) {
             if (ev.getEventName().equals("Electric Castle"))
                 ev.setEventImage(R.drawable.electriccastle);
-            if (ev.getEventName().equals("Meci de fotbal"))
+            else if (ev.getEventName().equals("Meci de fotbal"))
                 ev.setEventImage(R.drawable.mecidefotbal);
-            if (ev.getEventName().equals("SYF"))
+            else if (ev.getEventName().equals("SYF"))
                 ev.setEventImage(R.drawable.syf);
-            if (ev.getEventName().equals("Untold"))
+            else if (ev.getEventName().equals("Untold"))
                 ev.setEventImage(R.drawable.untold);
-            if (ev.getEventName().equals("Wine Festival"))
+            else if (ev.getEventName().equals("Wine Festival"))
                 ev.setEventImage(R.drawable.winefestival);
+            else if (ev.getEventName().equals("Beach, please!"))
+                ev.setEventImage(R.drawable.beach);
+            else if (ev.getEventName().equals("Horizon Festival"))
+                ev.setEventImage(R.drawable.horizon);
+            else if (ev.getEventName().equals("Hustle"))
+                ev.setEventImage(R.drawable.hustle);
+            else if (ev.getEventName().equals("Neversea"))
+                ev.setEventImage(R.drawable.neversea);
+            else if (ev.getEventName().equals("SAGA Festival"))
+                ev.setEventImage(R.drawable.saga);
+            else if (ev.getEventName().equals("Summerwell"))
+                ev.setEventImage(R.drawable.summerwell);
+            else
+                ev.setEventImage(R.drawable.demo);
         }
     }
 }
